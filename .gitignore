@@ -1,2 +1,4 @@
-CowBot.py
 venv/
+disctoken.py
+__pycache__/
+logs/discord.log
