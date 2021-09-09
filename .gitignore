@@ -1,4 +1,11 @@
 venv/
 disctoken.py
-__pycache__/
 logs/discord.log
+
+__pycache__/
+cogs/__pycache__/
+cogs/admin/__pycache__/
+cogs/rosters/__pycache__/
+seeds/__pycache__/
+
+seeds/cowbot.db

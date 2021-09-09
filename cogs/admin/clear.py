@@ -6,9 +6,9 @@ class Clear(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(aliases=['clear', 'Clear'])
+    @commands.command(aliases=['Clear'])
     @commands.has_permissions(manage_messages=True)
-    async def _clear(self, ctx, amount=1):
+    async def clear(self, ctx, amount=1):
         await ctx.channel.purge(limit=amount+1)
 
     
