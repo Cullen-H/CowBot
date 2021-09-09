@@ -6,21 +6,21 @@ class KickBan(commands.Cog):
     def __init__(self, client):                
         self.client = client
     
-    @commands.command()
+    @commands.command(aliases=['Kick'])
     @commands.has_permissions(administrator=True)
-    async def Kick(self, ctx, member : discord.Member, *, reason=None):
+    async def kick(self, ctx, member : discord.Member, *, reason=None):
         await member.kick(reason=reason)
         await ctx.channel.purge(limit=1)
 
-    @commands.command()
+    @commands.command(aliases=['Ban'])
     @commands.has_permissions(administrator=True)
-    async def Ban(self, ctx, member : discord.Member, * , reason=None):
+    async def ban(self, ctx, member : discord.Member, * , reason=None):
         await member.ban(reason=reason)
         await ctx.channel.purge(limit=1)
 
-    @commands.command()
+    @commands.command(aliases=['Unban'])
     @commands.has_permissions(administrator=True)
-    async def Unban(self, ctx, *, member):
+    async def unban(self, ctx, *, member):
         await ctx.channel.purge(limit=1)
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')

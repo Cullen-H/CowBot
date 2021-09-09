@@ -3,16 +3,17 @@ import sqlite3
 class RosterChannel:
     """SQL model for roster channel"""
 
-    def add(server_id, channel_id):
+    def set(server_id, channel_id):
         """Adds a new roster channel for a given server"""
 
         conn = sqlite3.connect('cowbot.db')
         c = conn.cursor()
 
         c.execute("""
-            INSERT INTO roster_channel (channel_id, server_id)
-            VALUES (:channel_id, :server_id)
-            """, {'channel_id': channel_id, 'server_id': server_id})
+            INSERT INTO roster_channel (server_id, channel_id)
+            VALUES (:server_id, :channel_id)
+            ON CONFLICT (server_id) DO UPDATE SET channel_id = :channel_id
+            """, {'server_id': server_id, 'channel_id': channel_id})
         
         conn.commit()
         conn.close()
@@ -43,6 +44,9 @@ class RosterChannel:
             FROM roster_channel
             WHERE server_id = :server_id
             """, {'server_id': server_id})
+        channel_id = c.fetchone()
 
         conn.commit()
         conn.close()
+
+        return channel_id[0]
