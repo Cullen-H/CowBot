@@ -29,7 +29,7 @@ class Rosters(commands.Cog):
 
         for msg in messages:
             if msg.content[:len(roster_name)] == roster_name:
-                dm = await msg.author.create_dm()
+                dm = await ctx.message.author.create_dm()
                 await dm.send(msg.content)
                 return
 
